@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <title>Happy Anniversary</title>
+  <link href="https://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,700" rel="stylesheet">
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #ffe2ec 0%, #a1c4fd 100%);
+      color: #233;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      margin: 24px auto;
+      padding: 22px;
+      background: rgba(255,255,255,0.97);
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(94,94,255,0.06);
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      /* Mobile nav sticky at top, comment these 2 lines if you don't want sticky! */
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.97);
+      z-index: 7;
+      padding: 7px 0 5px 0;
+    }
+    nav button {
+      background: #fd397a;
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      margin: 2px 0;
+      border-radius: 13px;
+      font-size: 1em;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 1px;
+      transition: 0.12s;
+      outline: none;
+      min-width: 34vw; /* easier for tapping */
+      max-width: 180px;
+      flex: 1 1 40%;
+    }
+    nav button.active, nav button:focus {
+      background: #7e5bef;
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2em;
+      color: #fd397a;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 1.12em;
+      color: #7e5bef;
+      margin-top: 0;
+      margin-bottom: 17px;
+      font-weight: 600;
+    }
+    .hearts { font-size: 2em; color: #fd397a; margin-top:8px;}
+    .photo {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #ffe2ec;
+      margin: 10px 3px;
+      box-shadow: 0 2px 20px #ffe2ec50;
+      max-width: 34vw;
+      max-height: 34vw;
+      transition: 0.15s;
+    }
+
+    .quiz-q {
+      font-size: 1.09em;
+      margin: 20px 0 13px 0;
+      color: #44477f;
+      min-height: 38px;
+    }
+    .quiz-btn {
+      display: block;
+      background: #fff9fa;
+      color: #7e5bef;
+      border: 2px solid #fd397ad4;
+      margin: 13px auto 0;
+      margin-bottom: 8px;
+      padding: 13px 10px;
+      width: 97%;
+      max-width: 370px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.13em;
+      transition:0.17s;
+    }
+    .quiz-btn:active {
+      background: #fd397a11;
+    }
+    .correct {background: #c4f7d1 !important; color: #348176 !important;}
+    .incorrect {background: #f2b6c3 !important; color: #b80036 !important;}
+    .quiz-next {
+      background: #7e5bef; color:#fff; border:none;
+      padding:11px 28px; border-radius:10px; font-size:1.09em; margin-top:19px; cursor:pointer;
+      margin-bottom: 7px;
+    }
+    .score {
+      color: #7e5bef; font-size: 1.13em; margin-top:18px;
+    }
+    .love-letter {
+      color: #44477f;
+      background: #fff9fa;
+      border-left: 6px solid #fd397a70;
+      padding: 17px 10px 18px 20px;
+      border-radius: 13px;
+      margin: 25px auto 9px;
+      max-width: 94vw;
+      font-size: 1.09em;
+      line-height: 1.65;
+      word-break: break-word;
+      box-sizing: border-box;
+    }
+    .footer {
+      font-size: 1.00em; color: #888; font-style: italic; letter-spacing: 0.5px; margin-top: 18px; margin-bottom: 6px;
+    }
+
+    /* Real Mobile Tweaks */
+    @media(max-width: 600px){
+      .container {
+        padding: 7vw 2vw 6vw 2vw;
+        max-width: 100vw;
+        min-width: 0;
+      }
+      h1 {
+        font-size: 1.44em;
+      }
+      .photo {
+        width: 56vw;
+        height: 56vw;
+        min-width: 85px;
+        min-height: 85px;
+        max-width: 150px;
+        max-height: 150px;
+      }
+      .quiz-btn {
+        font-size: 1.14em;
+        min-height: 48px;
+        padding: 11px 4px;
+      }
+      nav button {
+        font-size: 1em;
+        padding: 10px 0;
+        max-width: none;
+        min-width: 42vw;
+      }
+    }
+
+    /* Ultra-small screens */
+    @media(max-width:375px) {
+      .photo {
+         min-width: 70px; min-height: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation bar -->
+    <nav>
+      <button class="nav-btn active" onclick="showPage('home')">Home</button>
+      <button class="nav-btn" onclick="showPage('memory')">Memory Quiz</button>
+      <button class="nav-btn" onclick="showPage('knowme')">How Well Do You Know Me?</button>
+      <button class="nav-btn" onclick="showPage('letter')">Love Letter</button>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="page-home">
+      <div class="hearts">❤️🎉💕</div>
+      <h1>Happy 1st Anniversary!</h1>
+      <img class="photo" src="pic1.jpg" alt="Anna">
+      <img class="photo" src="pic2.jpg" alt="Diego">
+      <div class="love-letter" style="font-size:1.09em;margin-top:20px;">
+        It has been <b>365 magical days</b>!<br> 
+        Here's a little something I made to celebrate us, our memories, and everything fun we've shared! <br><br>
+        With all my love, Kit
+      </div>
+      <div class="footer">July 17, 2025</div>
+    </div>
+
+    <!-- Memory Quiz Page -->
+    <div id="page-memory" style="display:none">
+      <h1>Memory Quiz</h1>
+      <h2>Guess these special moments! 💡</h2>
+      <div id="memory-quiz"></div>
+      <div id="memory-score" class="score"></div>
+    </div>
+
+    <!-- Know Me Quiz -->
+    <div id="page-knowme" style="display:none">
+      <h1>How Well Do You Know Me?</h1>
+      <h2>Let’s see how well you know your favorite person! 😁</h2>
+      <div id="knowme-quiz"></div>
+      <div id="knowme-score" class="score"></div>
+    </div>
+
+    <!-- Love Letter Page -->
+    <div id="page-letter" style="display:none">
+      <h1>A Letter For You</h1>
+      <div class="hearts">💌</div>
+      <div class="love-letter">
+        Dear Baba,<br><br>
+        <i>
+        Thank you for being the most supportive and always showing me so much love. We make such great partners and this 1 year really flew by so quickly. Lets have a blast next year - to more travels and adventures together! I love you!
+        <br><br>
+        Happy First Anniversary! <br>
+        Love,<br> Kit
+        </i>
+      </div>
+      <div class="footer">P.S. Click other pages for some happy memories &amp; fun! 🌹</div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation
+    function showPage(page) {
+      ['home','memory','knowme','letter'].forEach(function(pg){
+        document.getElementById('page-'+pg).style.display = (pg===page ? 'block' : 'none');
+      });
+      var btns = document.getElementsByClassName('nav-btn');
+      for(let i=0;i<btns.length; i++) btns[i].classList.remove('active');
+      if(page==='home') btns[0].classList.add('active');
+      if(page==='memory') btns[1].classList.add('active');
+      if(page==='knowme') btns[2].classList.add('active');
+      if(page==='letter') btns[3].classList.add('active');
+      // Reset quizzes on page switch
+      if(page==='memory') renderMemoryQuiz();
+      if(page==='knowme') renderKnowMeQuiz();
+    }
+
+    // Memory Quiz Data & Logic
+    const memoryQuestions = [
+      {
+        q: "The first time we called, what day was it?",
+        opts: ["Sunday", "Friday", "Saturday", "Monday"],
+        a: 2
+      },
+      {
+        q: "First photo in our Telegram chat (DONT CHECK!)",
+        opts: ["Sexy gf pic", "Screenshot of lottery", "Screenshot of some chat", "Javier Doppleganger"],
+        a: 3
+      },
+      {
+        q: "What movie did we watch together for the first time?",
+        opts: ["The Talented Mr Ripley", "Moneyball", "Fall", "A Taxi Driver"],
+        a: 0
+      }
+    ];
+    var memoryQuizState = {current:0, score:0, answers:[]};
+
+    function renderMemoryQuiz() {
+      const quizDiv = document.getElementById('memory-quiz');
+      const scoreDiv = document.getElementById('memory-score');
+      memoryQuizState.current = 0; memoryQuizState.score = 0; memoryQuizState.answers = [];
+      renderMemoryQuestion();
+      scoreDiv.innerHTML = '';
+    }
+    function renderMemoryQuestion() {
+      const q = memoryQuizState.current;
+      const quizDiv = document.getElementById('memory-quiz');
+      if(q>=memoryQuestions.length) {
+        quizDiv.innerHTML = `<div class='score'>You scored <b>${memoryQuizState.score}</b> out of <b>${memoryQuestions.length}</b>! 💖<br>
+          ${memoryQuizState.score===memoryQuestions.length? "Woohoo nice one baba!":"Hais! Next game ba"}
+          </div>
+          <button class='quiz-next' onclick='renderMemoryQuiz()'>Restart</button>`;
+        document.getElementById('memory-score').innerHTML = '';
+        return;
+      }
+      const Q = memoryQuestions[q];
+      quizDiv.innerHTML = `<div class="quiz-q">${Q.q}</div>`+ Q.opts.map(function(opt,i){
+        return `<button class="quiz-btn" onclick="selectMemory(${i})">${opt}</button>`;
+      }).join('');
+      document.getElementById('memory-score').innerHTML = `<b>Question ${q+1}</b> of <b>${memoryQuestions.length}</b>`;
+    }
+    function selectMemory(i) {
+      const q = memoryQuizState.current;
+      const Q = memoryQuestions[q];
+      const quizDiv = document.getElementById('memory-quiz');
+      let btns = quizDiv.querySelectorAll('.quiz-btn');
+      btns.forEach(b=>b.disabled=true);
+      if(i===Q.a) {
+        btns[i].classList.add('correct');
+        memoryQuizState.score++;
+      }
+      else {
+        btns[i].classList.add('incorrect');
+        btns[Q.a].classList.add('correct');
+      }
+      memoryQuizState.answers.push(i);
+      setTimeout(()=>{
+        memoryQuizState.current++;
+        renderMemoryQuestion();
+      }, 900);
+    }
+
+    // How Well Do You Know Me Quiz
+    const knowmeQuestions = [
+      {
+        q: "What's my favorite food?",
+        opts: ["Chicken Rice", "Hokkien Mee", "Bakchor Mee", "You:)"],
+        a: 3
+      },
+      {
+        q: "How do I get to office?",
+        opts: ["Train > Train", "Bus > Train > Train", "Bus > Bus > Train", "Bus > Train"],
+        a: 1
+      },
+      {
+        q: "What’s my dream car brand (achievable)?",
+        opts: ["BMW", "BYD", "Mercz", "Tesla"],
+        a: 2
+      }
+    ];
+    var knowMeState = {current:0, score:0, answers:[]};
+
+    function renderKnowMeQuiz() {
+      knowMeState.current=0; knowMeState.score=0; knowMeState.answers=[];
+      renderKnowMeQuestion();
+      document.getElementById('knowme-score').innerHTML = '';
+    }
+    function renderKnowMeQuestion() {
+      const q = knowMeState.current;
+      const quizDiv = document.getElementById('knowme-quiz');
+      if(q>=knowmeQuestions.length) {
+        quizDiv.innerHTML = `<div class='score'>You got <b>${knowMeState.score}</b> out of <b>${knowmeQuestions.length}</b> right!<br>
+          ${knowMeState.score==knowmeQuestions.length ? "Wow, you know me SO well! You are the best Baba!":"Please try again:)"}</div>
+          <button class='quiz-next' onclick='renderKnowMeQuiz()'>Restart</button>`;
+        document.getElementById('knowme-score').innerHTML = '';
+        return;
+      }
+      const Q = knowmeQuestions[q];
+      quizDiv.innerHTML = `<div class="quiz-q"> ${Q.q}</div>` + Q.opts.map(function(opt,i){
+        return `<button class="quiz-btn" onclick="selectKnowMe(${i})">${opt}</button>`
+      }).join('');
+      document.getElementById('knowme-score').innerHTML = `<b>Question ${q+1}</b> of <b>${knowmeQuestions.length}</b>`;
+    }
+    function selectKnowMe(i) {
+      const q=knowMeState.current;
+      const Q = knowmeQuestions[q];
+      const quizDiv = document.getElementById('knowme-quiz');
+      let btns = quizDiv.querySelectorAll('.quiz-btn');
+      btns.forEach(b=>b.disabled=true);
+      if(i===Q.a) {
+        btns[i].classList.add('correct');
+        knowMeState.score++;
+      } else {
+        btns[i].classList.add('incorrect');
+        btns[Q.a].classList.add('correct');
+      }
+      knowMeState.answers.push(i);
+      setTimeout(()=>{
+        knowMeState.current++;
+        renderKnowMeQuestion();
+      }, 900);
+    }
+  </script>
+</body>
+</html>
